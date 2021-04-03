@@ -29,3 +29,27 @@ app.layout=html.Div([
             'textAlign': 'left',
             'color': colors['text']
         })],style={'columnCount': 2}),
+    html.Div([ dcc.Dropdown(
+                id='xaxis-column',
+                options=[{'label': i, 'value': i} for i in rw.keys()],
+                value=str(rw.keys()[0])
+            ),  html.H3(children=['Red Wine'], style={'textAlign': 'center','Font':"Times New Roman" ,'color': "blue"})
+                ,dcc.Graph(id='redwine-graphic') ],style={'width': '45%', 'display': 'inline-block'}),
+    html.Div([dcc.Dropdown(
+                id='yaxis-column',
+                options=[{'label': i, 'value': i} for i in rw.keys()],
+                value=str(rw.keys()[1])
+            ),  html.H3(children=['White Wine'], style={'textAlign': 'center','Font':"Times New Roman" ,'color': "blue"}),dcc.Graph(id='whitewine-graphic') ],style={'width': '48%' , 'float': 'right', 'display': 'inline-block'}),
+    html.Div([   html.Label('Data Sampeling Ratio',style={'color': colors['background']}),dcc.Input(
+        id='num-rate',
+        type='number',
+        value=90
+    ),    html.Label('Select Maximum Quality',style={'color': colors['background']}),   dcc.Slider(
+        id='quality-slider',
+        min=ww['quality'].min(),
+        max=ww['quality'].max(),
+        value=ww['quality'].max(),
+        marks={str(quality): str(quality) for quality in ww['quality'].unique()},
+        step=None
+    )])
+    ])
