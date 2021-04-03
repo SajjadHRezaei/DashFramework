@@ -16,3 +16,16 @@ external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 rw=pd.read_csv('winequality-red.csv',sep=';')
 ww=pd.read_csv('winequality-white.csv',sep=';')
+
+app.layout=html.Div([
+    html.Div([    html.H2(
+        children=['X axis'],
+        style={
+            'textAlign': 'left',
+            'color': colors['text']
+        }),    html.H2(
+        children=['Y axis'],
+        style={
+            'textAlign': 'left',
+            'color': colors['text']
+        })],style={'columnCount': 2}),
