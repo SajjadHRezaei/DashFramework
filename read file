@@ -53,3 +53,11 @@ app.layout=html.Div([
         step=None
     )])
     ])
+
+@app.callback(
+    Output('redwine-graphic', 'figure'),
+    Output('whitewine-graphic', 'figure'),
+    Input('xaxis-column', 'value'),
+    Input('yaxis-column', 'value'),
+    Input('quality-slider', 'value'), 
+    State('num-rate', 'value'))
