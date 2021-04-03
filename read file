@@ -61,3 +61,36 @@ app.layout=html.Div([
     Input('yaxis-column', 'value'),
     Input('quality-slider', 'value'), 
     State('num-rate', 'value'))
+    
+def graf_update(x_axis,y_axis,quality_slider,data_rate):
+    
+    rate=int(data_rate)/100
+    new_rw=rw[rw['quality']<=quality_slider].sample(frac=rate)
+    new_ww=ww[ww['quality']<=quality_slider].sample(frac=rate)
+    
+    rwfig=px.scatter(new_rw,x=str(x_axis),y=str(y_axis),color='quality')
+    
+    rwfig.update_layout(margin={'l': 40, 'b': 40, 't': 10, 'r': 0},
+                        font_family="Times New Roman", hovermode='closest')
+
+    rwfig.update_xaxes(title=str(x_axis), type='linear',title_font_size=28,title_font_color="blue" )
+
+    rwfig.update_yaxes(title=str(y_axis), type='linear',title_font_size=28,title_font_color="blue")
+
+
+
+    wwfig=px.scatter(new_ww,x=str(x_axis),y=str(y_axis),color='quality')
+    
+    wwfig.update_layout(margin={'l': 40, 'b': 40, 't': 10, 'r': 0},font_family="Times New Roman", hovermode='closest')
+
+    wwfig.update_xaxes(title=str(x_axis), type='linear',title_font_size=28,title_font_color="blue" )
+
+    wwfig.update_yaxes(title=str(y_axis), type='linear',title_font_size=28,title_font_color="blue")    
+    
+    return rwfig,wwfig
+
+
+
+
+if __name__ == '__main__':
+    app.run_server(debug=True)
